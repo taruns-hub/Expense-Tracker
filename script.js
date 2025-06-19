@@ -29,8 +29,8 @@ document.getElementById('expense-form').addEventListener('submit', async functio
 
     if (res.ok) {
         alert("Expense added!");
-        document.getElementById('expense-form').reset(); // Clear form
-        loadExpenses(getSelectedCategory()); // Refresh list
+        document.getElementById('expense-form').reset(); 
+        loadExpenses(getSelectedCategory()); 
     }
 });
 
@@ -74,13 +74,13 @@ async function deleteExpense(id) {
 
     if (res.ok) {
         alert("Expense deleted!");
-        loadExpenses(getSelectedCategory()); // Refresh after deletion with current filter
+        loadExpenses(getSelectedCategory()); 
     } else {
         alert("Failed to delete expense.");
     }
 }
 
 window.onload = () => {
-    loadExpenses(); // Load all by default
+    loadExpenses(); 
 };
 
