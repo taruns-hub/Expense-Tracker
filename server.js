@@ -1,21 +1,21 @@
-// server.js
+
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const PORT = 3000;
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 
-// Connect to SQLite DB
+
 const db = new sqlite3.Database('./expenses.db', (err) => {
     if (err) return console.error(err.message);
     console.log("Connected to SQLite DB.");
 });
 
-// Create table if not exists
+
 db.run(`CREATE TABLE IF NOT EXISTS expenses (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
@@ -24,7 +24,7 @@ db.run(`CREATE TABLE IF NOT EXISTS expenses (
     date TEXT
 )`);
 
-// Add an expense
+
 app.post('/add-expense', (req, res) => {
     const { name, amount, category, date } = req.body;
     db.run(`INSERT INTO expenses (name, amount, category, date) VALUES (?, ?, ?, ?)`,
@@ -35,8 +35,8 @@ app.post('/add-expense', (req, res) => {
         });
 });
 
-// Get all expenses
-// Get all expenses or filter by category
+
+
 app.get('/expenses', (req, res) => {
     const category = req.query.category;
 
@@ -55,12 +55,12 @@ app.get('/expenses', (req, res) => {
 });
 
 
-// Start server
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 
-// Delete an expense by ID
+
 app.delete('/delete-expense/:id', (req, res) => {
     const id = req.params.id;
 
